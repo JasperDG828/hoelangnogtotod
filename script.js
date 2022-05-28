@@ -1,6 +1,6 @@
 const timeLeftElement = document.getElementById("timeLeft");
-var now = moment();
 var od = moment("2022-07-03T14:00");
+var endOd = moment("2022-07-09T10:00");
 
 function loadFile(filePath) {
   var result = null;
@@ -15,20 +15,23 @@ function loadFile(filePath) {
 
 function refreshTime() {
   var now = moment();
-  var days = od.diff(now, "days");
-  var hours = od.diff(now, "hours") - days * 24;
-  var minutes = od.diff(now, "minutes") - od.diff(now, "hours") * 60;
-  var seconds =
-    od.diff(now, "seconds") - 60 * minutes - 3600 * hours - 86400 * days;
-  timeLeftElement.innerHTML =
-    days +
-    "dagen " +
-    String(hours).padStart(2, "0") +
-    "u " +
-    String(minutes).padStart(2, "0") +
-    "min " +
-    String(seconds).padStart(2, "0") +
-    "sec ";
+  if (!now.isBetween(od, endOd)) {
+    var days = od.diff(now, "days");
+    var hours = od.diff(now, "hours") - days * 24;
+    var minutes = od.diff(now, "minutes") - od.diff(now, "hours") * 60;
+    var seconds =
+      od.diff(now, "seconds") - 60 * minutes - 3600 * hours - 86400 * days;
+    timeLeftElement.innerHTML =
+      days +
+      "dagen " +
+      String(hours).padStart(2, "0") +
+      "u " +
+      String(minutes).padStart(2, "0") +
+      "min " +
+      String(seconds).padStart(2, "0") +
+      "sec ";
+  }
+  timeLeftElement.innerHTML = "Het is bezig!!!";
 }
 
 const urls = JSON.parse(loadFile("./urls.json"));
