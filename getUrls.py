@@ -11,5 +11,4 @@ for i in resj["photoset"]["photo"]:
     secret = i["secret"]
     urls.append(
         f"https://live.staticflickr.com/{serverId}/{photoID}_{secret}_b.jpg")
-    print(i["title"])
 open("urls.json", "w+").write(json.dumps(urls))
