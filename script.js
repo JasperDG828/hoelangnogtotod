@@ -1,6 +1,7 @@
 const timeLeftElement = document.getElementById("timeLeft");
-var now = moment();
-var od = moment("2022-07-03T14:00");
+const container = document.getElementById("container");
+const od = moment("2022-07-03T14:00");
+const odEnd = moment("2022-07-09T10:00");
 
 function loadFile(filePath) {
   var result = null;
@@ -14,21 +15,39 @@ function loadFile(filePath) {
 }
 
 function refreshTime() {
-  var now = moment();
-  var days = od.diff(now, "days");
-  var hours = od.diff(now, "hours") - days * 24;
-  var minutes = od.diff(now, "minutes") - od.diff(now, "hours") * 60;
-  var seconds =
-    od.diff(now, "seconds") - 60 * minutes - 3600 * hours - 86400 * days;
-  timeLeftElement.innerHTML =
-    days +
-    "dagen " +
-    String(hours).padStart(2, "0") +
-    "u " +
-    String(minutes).padStart(2, "0") +
-    "min " +
-    String(seconds).padStart(2, "0") +
-    "sec ";
+  let now = moment();
+  now.locale("nl-be");
+  if (now.isBefore(od)) {
+    var days = od.diff(now, "days");
+    var hours = od.diff(now, "hours") - days * 24;
+    var minutes = od.diff(now, "minutes") - od.diff(now, "hours") * 60;
+    var seconds =
+      od.diff(now, "seconds") - 60 * minutes - 3600 * hours - 86400 * days;
+    timeLeftElement.innerHTML =
+      days +
+      "dagen " +
+      String(hours).padStart(2, "0") +
+      "u " +
+      String(minutes).padStart(2, "0") +
+      "min " +
+      String(seconds).padStart(2, "0") +
+      "sec ";
+  } else if (now.isBetween(od, odEnd)) {
+    timeLeftElement.innerHTML =
+      "Veel plezier!<br>" +
+      now.format("DD MMMM YYYY") +
+      " " +
+      now.format("HH:mm");
+    if (window.innerWidth > 600) {
+      container.style.height = "15%";
+      container.style.width = "25%";
+    } else {
+      container.style.height = "25%";
+      container.style.width = "60%";
+    }
+  } else if (now.isAfter(odEnd)) {
+    timeLeftElement.innerHTML = "Tot volgend jaar!";
+  }
 }
 
 const urls = JSON.parse(loadFile("./urls.json"));
