@@ -1,5 +1,6 @@
 const timeLeftElement = document.getElementById("timeLeft");
 const container = document.getElementById("container");
+const footer = document.getElementById("foot");
 const od = moment("2022-07-03T14:00");
 const odEnd = moment("2022-07-09T10:00");
 
@@ -50,7 +51,7 @@ function refreshTime() {
   }
 }
 
-const urls = JSON.parse(loadFile("./urls.json"));
+const urls = JSON.parse(loadFile("./urls2022.json"));
 const body = document.getElementById("body");
 function newBackground() {
   var url = urls[Math.floor(Math.random() * urls.length)];
@@ -64,3 +65,15 @@ function newBackground() {
 newBackground();
 setInterval(newBackground, 5000);
 setInterval(refreshTime, 100);
+
+function toggleVis() {
+  if (document.getElementById("eye").innerHTML === "visibility_off") {
+    container.style = "visibility: hidden;";
+    foot.style = "visibility: hidden;";
+    document.getElementById("eye").innerHTML = "visibility";
+  } else {
+    container.style = "visibility: visible;";
+    foot.style = "visibility: visible;";
+    document.getElementById("eye").innerHTML = "visibility_off";
+  }
+}
