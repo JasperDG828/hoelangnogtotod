@@ -1,8 +1,8 @@
 const timeLeftElement = document.getElementById("timeLeft");
 const container = document.getElementById("container");
 const footer = document.getElementById("foot");
-const od = moment("2022-07-03T14:00");
-const odEnd = moment("2022-07-09T10:00");
+const od = moment("2023-07-02T14:00");
+const odEnd = moment("2023-07-08T10:00");
 
 function loadFile(filePath) {
   var result = null;
