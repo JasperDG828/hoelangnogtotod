@@ -17,7 +17,6 @@ function loadFile(filePath) {
 
 function refreshTime() {
   let now = moment();
-  now.locale("nl-be");
   if (now.isBefore(od)) {
     var days = od.diff(now, "days");
     var hours = od.diff(now, "hours") - days * 24;
