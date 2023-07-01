@@ -34,11 +34,7 @@ function refreshTime() {
       String(seconds).padStart(2, "0") +
       "sec ";
   } else if (now.isBetween(od, odEnd)) {
-    timeLeftElement.innerHTML =
-      "Veel plezier!<br>" +
-      now.format("DD MMMM YYYY") +
-      " " +
-      now.format("HH:mm");
+    timeLeftElement.innerHTML = "Veel plezier!"
     if (window.innerWidth > 600) {
       container.style.height = "15%";
       container.style.width = "25%";
